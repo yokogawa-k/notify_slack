@@ -16,6 +16,7 @@ type Config struct {
 	Channel   string
 	Username  string
 	IconEmoji string
+	FileType  string
 	Duration  time.Duration
 }
 

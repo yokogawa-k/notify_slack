@@ -37,6 +37,7 @@ type PostFileParam struct {
 	Channel  string
 	Content  string
 	Filename string
+	FileType string
 }
 
 func NewClient(urlStr string, logger *log.Logger) (*Client, error) {
@@ -123,6 +124,7 @@ func (c *Client) PostFile(ctx context.Context, token string, param *PostFilePara
 	v.Set("token", token)
 	v.Set("content", param.Content)
 	v.Set("filename", param.Filename)
+	v.Set("filetype", param.FileType)
 	v.Set("channels", param.Channel)
 
 	req, err := http.NewRequest("POST", slackFilesUploadURL, strings.NewReader(v.Encode()))

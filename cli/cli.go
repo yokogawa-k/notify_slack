@@ -53,6 +53,7 @@ func (c *CLI) Run(args []string) int {
 	flags.StringVar(&c.conf.Token, "token", "", "token")
 	flags.StringVar(&c.conf.Username, "username", "", "specify username")
 	flags.StringVar(&c.conf.IconEmoji, "icon-emoji", "", "specify icon emoji")
+	flags.StringVar(&c.conf.FileType, "filetype", "", "specify filetype when post snippet")
 	flags.DurationVar(&c.conf.Duration, "interval", time.Second, "interval")
 	flags.StringVar(&tomlFile, "c", "", "config file name")
 
@@ -169,6 +170,7 @@ func (c *CLI) uploadSnippet(ctx context.Context, filename string) error {
 		Channel:  c.conf.Channel,
 		Filename: filename,
 		Content:  string(content),
+		FileType: c.conf.FileType,
 	}
 	err = c.sClient.PostFile(ctx, c.conf.Token, param)
 	if err != nil {

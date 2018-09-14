@@ -137,6 +137,7 @@ func TestPostFile_Success(t *testing.T) {
 		Channel:  "test-channel",
 		Content:  "testtesttest",
 		Filename: "test.txt",
+		FileType: "text",
 	}
 
 	muxAPI.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -161,6 +162,7 @@ func TestPostFile_Success(t *testing.T) {
 		expectedV.Set("token", slackToken)
 		expectedV.Set("content", param.Content)
 		expectedV.Set("filename", param.Filename)
+		expectedV.Set("filetype", param.FileType)
 		expectedV.Set("channels", param.Channel)
 
 		if !reflect.DeepEqual(actualV, expectedV) {
